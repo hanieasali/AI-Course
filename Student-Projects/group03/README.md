@@ -10,7 +10,6 @@ A team project focused on predicting whether a bank loan application will be **a
 - Mohammad ebrahimi
 - Nima Rahnavard
 - elika taheri
-- User 4  
 - Farbod Sedighi 
 
 ---

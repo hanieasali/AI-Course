@@ -1,10 +1,11 @@
 """
 Emotional Advisor Telegram Bot
 AI Course Project
-Course Project:Artificial Intelligence  
+Course Project: Artificial Intelligence
 University: Tehran Markaz Islamic Azad University
 """
 
+import os
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -16,7 +17,14 @@ from telegram.ext import (
 # =========================
 # Configuration
 # =========================
-BOT_TOKEN = "..."
+# The bot token should be set as an environment variable.
+# Example (Linux / Mac):
+# export BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
+#
+# Example (Windows PowerShell):
+# setx BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # =========================
 # Emotion Database
@@ -208,16 +216,14 @@ emotions = {
 # Helper Functions
 # =========================
 def detect_emotion(text: str):
-    """Detects emotion based on keywords."""
     text = text.lower()
     for emotion, data in emotions.items():
         if any(keyword in text for keyword in data["keywords"]):
             return emotion
-    return "مبهم"  # Unknown or mixed emotion
+    return "مبهم"
 
 
 def build_response(emotion_key: str):
-    """Builds the full response message in Persian."""
     data = emotions[emotion_key]
     message = "\n".join(data["validation"]) + "\n\n"
     message += "راهکارهای عملی:\n"
@@ -230,24 +236,16 @@ def build_response(emotion_key: str):
 # Handlers
 # =========================
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handles incoming messages and responds."""
     user_text = update.message.text.strip()
 
-    # Greeting
     if user_text in ["سلام", "hi", "hello"]:
-        await update.message.reply_text(
-            "سلام، حالت چطوره؟ چه طور می‌تونم کمکت کنم؟"
-        )
+        await update.message.reply_text("سلام، حالت چطوره؟ چه طور می‌تونم کمکت کنم؟")
         return
 
-    # Farewell
     if user_text in ["خدانگهدار", "خداحافظ"]:
-        await update.message.reply_text(
-            "ممنون که حرف زدی، امیدوارم حالت هر روز بهتر بشه."
-        )
+        await update.message.reply_text("ممنون که حرف زدی، امیدوارم حالت هر روز بهتر بشه.")
         return
 
-    # Detect emotion and respond
     emotion = detect_emotion(user_text)
     response = build_response(emotion)
     await update.message.reply_text(response)
@@ -256,7 +254,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Main
 # =========================
 def main():
-    """Starts the bot application."""
+    if not BOT_TOKEN:
+        raise ValueError("BOT_TOKEN is not set. Please define it as an environment variable.")
+
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
     print("Your Telegram bot is now running...")

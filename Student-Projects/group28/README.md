@@ -15,7 +15,7 @@ This project is developed collaboratively by a five-member team:
 1. **Shahrad-Sterji** – Project Lead / System Architecture
 2. **Ehsan Hadi** – Computer Vision & OpenCV Specialist
 3. **Ali moazeni 3** – AI & Face Mesh Analysis
-4. **Team Member 4** – Optimization & Performance Engineering
+4. **Damoon Nani** – Optimization & Performance Engineering
 5. **Team Member 5** – Documentation & Presentation
 
 > *(Replace names and roles as needed)*

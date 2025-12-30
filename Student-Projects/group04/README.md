@@ -41,8 +41,9 @@ The purpose of this project is to demonstrate the application of Artificial Inte
 1️⃣ **Install Dependencies**  
    Ensure that Python 3.9 or higher is installed on your system.  
    Install all required libraries using the following command:
-pip install -r requirements.txt
-text2️⃣ **Create OpenRouter API Key**  
+pip install -r requirements.txt file
+
+2️⃣ **Create OpenRouter API Key**  
 Go to the website:  
 https://openrouter.ai/settings/keys  
 
@@ -63,7 +64,8 @@ Some AI services used in this project require VPN access.
 5️⃣ **Run the Application**  
 After completing the steps above, run the application using:
 python app.py
-text6️⃣ **Access the Application**  
+
+6️⃣ **Access the Application**  
 Once the application starts successfully, open your web browser and navigate to:  
 http://127.0.0.1:8000
 
